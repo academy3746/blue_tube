@@ -3,7 +3,7 @@
 import 'package:blue_tube/common/constants/sizes.dart';
 import 'package:blue_tube/common/utils/back_handler_button.dart';
 import 'package:blue_tube/features/main/models/video_model.dart';
-import 'package:blue_tube/features/main/view_models/blue_tube_repository.dart';
+import 'package:blue_tube/features/main/repositories/blue_tube_repository.dart';
 import 'package:blue_tube/features/main/widgets/blue_tube_player.dart';
 import 'package:flutter/material.dart';
 
