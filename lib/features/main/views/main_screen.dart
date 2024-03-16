@@ -42,7 +42,7 @@ class _MainScreenState extends State<MainScreen> {
           backgroundColor: Colors.black,
           centerTitle: true,
           title: const Text(
-            'BlueTube',
+            '노빠꾸탁재훈',
             style: TextStyle(color: Colors.white),
           ),
         ),
