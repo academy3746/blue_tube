@@ -1,6 +1,10 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:blue_tube/common/constants/sizes.dart';
 import 'package:blue_tube/common/utils/back_handler_button.dart';
+import 'package:blue_tube/features/main/models/video_model.dart';
+import 'package:blue_tube/features/main/view_models/blue_tube_repository.dart';
+import 'package:blue_tube/features/main/widgets/blue_tube_player.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -34,7 +38,52 @@ class _MainScreenState extends State<MainScreen> {
         return Future.value(false);
       },
       child: Scaffold(
-        body: Container(),
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          centerTitle: true,
+          title: const Text(
+            'BlueTube',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+        backgroundColor: Colors.black,
+        body: Container(
+          margin: const EdgeInsets.all(Sizes.size20),
+          child: FutureBuilder<List<VideoModel>>(
+            future: BlueTubeRepository.getVideos(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text(
+                    snapshot.error.toString(),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: Sizes.size16,
+                    ),
+                  ),
+                );
+              }
+
+              if (!snapshot.hasData) {
+                return const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                );
+              }
+
+              return RefreshIndicator(
+                onRefresh: () async {
+                  setState(() {});
+                },
+                child: ListView(
+                  physics: const BouncingScrollPhysics(),
+                  children: snapshot.data!
+                      .map((data) => BlueTubePlayer(videoModel: data))
+                      .toList(),
+                ),
+              );
+            },
+          ),
+        ),
       ),
     );
   }

@@ -1,8 +1,13 @@
 import 'package:blue_tube/features/main/views/main_screen.dart';
 import 'package:blue_tube/features/splash/views/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+
   runApp(const TubeApp());
 }
 
